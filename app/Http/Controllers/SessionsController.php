@@ -19,12 +19,19 @@ class SessionsController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($data)) {
+        if (Auth::attempt($data, $request->has('remember'))) {
             session()->flash('success', '登录成功！');
             return redirect()->route('users.show', [Auth::user()]);
         } else {
             session()->flash('danger', '登录失败！');
             return redirect()->back();
         }
+    }
+
+    public function destory()
+    {
+        Auth::logout();
+        session()->flush('success', '您已成功退出！');
+        return redirect()->route('login');
     }
 }
