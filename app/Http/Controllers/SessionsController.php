@@ -21,7 +21,7 @@ class SessionsController extends Controller
 
         if (Auth::attempt($data, $request->has('remember'))) {
             session()->flash('success', '登录成功！');
-            return redirect()->route('users.show', [Auth::user()]);
+            return redirect()->intended(route('users.show', [Auth::user()]));
         } else {
             session()->flash('danger', '登录失败！');
             return redirect()->back();
