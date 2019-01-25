@@ -28,7 +28,7 @@ class SessionsController extends Controller
         }
     }
 
-    public function destory()
+    public function destroy()
     {
         Auth::logout();
         session()->flush('success', '您已成功退出！');
